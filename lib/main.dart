@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,19 +17,20 @@ class _MyAppState extends State<MyApp> {
     },
     {
       "questionText": "What does “www” stand for in a website browser ?",
-      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+      "answers": ['Water World War', 'World Web Wide', 'World Wide Web', 'Web Wide World',],
     },
     {
       "questionText": "What is the capital city of Cambodia ? ",
-      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+      "answers": ['Seim Reap', 'Kampot', 'Kandal', 'Phnom Penh'],
     },
     {
-      "questionText": "What is the name of the largest ocean on earth?" ,
-      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+      "questionText": "What is the name of the largest ocean on earth?",
+      "answers": ['Antarctic Ocean', 'Indian Ocean ', ' Pacific Ocean', 'Arctic Ocean'],
     },
     {
-      "questionText": "What year was the very first model of the iPhone released ?",
-      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+      "questionText":
+          "What year was the very first model of the iPhone released ?",
+      "answers": ['2005', '2010', '2007', '2006'],
     },
   ];
 
@@ -44,7 +46,6 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionsIndex = 0;
     });
-
   }
 
   @override
@@ -57,23 +58,26 @@ class _MyAppState extends State<MyApp> {
         body: _questionsIndex < _questions.length
             ? Column(
                 children: [
-                  Question(_questions[_questionsIndex]["questionText"] as String),
-                  ElevatedButton(
-                    onPressed: _answerQuestions,
-                    child: Text("Press Me !"),
-                  ),
-                  ElevatedButton(
-                    onPressed: _answerQuestions,
-                    child: Text("Press Me !"),
-                  ),
-                  ElevatedButton(
-                    onPressed: _answerQuestions,
-                    child: Text("Press Me !"),
-                  ),
-                  ElevatedButton(
-                    onPressed: _answerQuestions,
-                    child: Text("Press Me !"),
-                  ),
+                  Question(
+                      _questions[_questionsIndex]["questionText"] as String),
+
+
+                  ...(_questions[_questionsIndex]["answers"] as List<String>)
+                      .map((answer) {
+                    return Answer(_answerQuestions, answer);
+                  }).toList()
+                  // ElevatedButton(
+                  //   onPressed: _answerQuestions,
+                  //   child: Text("Press Me !"),
+                  // ),
+                  // ElevatedButton(
+                  //   onPressed: _answerQuestions,
+                  //   child: Text("Press Me !"),
+                  // ),
+                  // ElevatedButton(
+                  //   onPressed: _answerQuestions,
+                  //   child: Text("Press Me !"),
+                  // ),
                 ],
               )
             : Center(
