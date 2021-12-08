@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,11 +10,26 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _questions = [
-    "what is the biggest continent ?",
-    "What does “www” stand for in a website browser ?",
-    "What is the capital city of Cambodia ? ",
-    "What is the name of the largest ocean on earth?",
-    "What year was the very first model of the iPhone released ?",
+    {
+      "questionText": "what is the biggest continent ?",
+      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+    },
+    {
+      "questionText": "What does “www” stand for in a website browser ?",
+      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+    },
+    {
+      "questionText": "What is the capital city of Cambodia ? ",
+      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+    },
+    {
+      "questionText": "What is the name of the largest ocean on earth?" ,
+      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+    },
+    {
+      "questionText": "What year was the very first model of the iPhone released ?",
+      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+    },
   ];
 
   var _questionsIndex = 0;
@@ -22,6 +38,13 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionsIndex += 1;
     });
+  }
+
+  void _resetState() {
+    setState(() {
+      _questionsIndex = 0;
+    });
+
   }
 
   @override
@@ -34,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         body: _questionsIndex < _questions.length
             ? Column(
                 children: [
-                  Text(_questions[_questionsIndex]),
+                  Question(_questions[_questionsIndex]["questionText"] as String),
                   ElevatedButton(
                     onPressed: _answerQuestions,
                     child: Text("Press Me !"),
@@ -54,7 +77,15 @@ class _MyAppState extends State<MyApp> {
                 ],
               )
             : Center(
-                child: Text("You did it"),
+                child: Column(
+                  children: [
+                    Text("You did it"),
+                    ElevatedButton(
+                      child: Text("restart quiz"),
+                      onPressed: _resetState,
+                    ),
+                  ],
+                ),
               ),
       ),
     );
