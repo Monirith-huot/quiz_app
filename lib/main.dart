@@ -10,41 +10,76 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _questions = [
+  final _questions = const [
     {
-      "questionText": "what is the biggest continent ?",
-      "answers": ["Asia", "Africa", "South Africa", "Eurrope"],
+      'questionText': "what is the biggest continent ?",
+      "answers": [
+
+        {"text": 'Asia', "score": 10},
+        {'text': 'Africa', "score": 0},
+        {'text': 'South America', "score": 0},
+        {'text': 'Eurrope', "score": 0},
+      ]
     },
     {
-      "questionText": "What does “www” stand for in a website browser ?",
-      "answers": ['Water World War', 'World Web Wide', 'World Wide Web', 'Web Wide World',],
+      'questionText': "What does “www” stand for in a website browser ?",
+      "answers": [
+      
+        {"text": 'Water World War ', "score": 0},
+        {'text': 'World Web Wide', "score": 0},
+        {'text': 'World Wide Web', "score": 10},
+        {'text': 'Web Wide World', "score": 0},
+      ]
     },
     {
-      "questionText": "What is the capital city of Cambodia ? ",
-      "answers": ['Seim Reap', 'Kampot', 'Kandal', 'Phnom Penh'],
+      'questionText': "What is the capital city of Cambodia ? ",
+      "answers": [
+
+        {"text": 'Seim Reap', "score": 0},
+        {'text': 'Kampot', "score": 0},
+        {'text': 'Kandal', "score": 0},
+        {'text': 'Phnom Penh', "score": 10},
+      ]
     },
     {
-      "questionText": "What is the name of the largest ocean on earth?",
-      "answers": ['Antarctic Ocean', 'Indian Ocean ', ' Pacific Ocean', 'Arctic Ocean'],
+      'questionText': "What is the name of the largest ocean on earth?",
+      "answers": [
+
+        {"text": 'Antarctic Ocean', "score": 0},
+        {'text': 'Indian Ocean ', "score": 0},
+        {'text': ' Pacific Ocean', "score": 10},
+        {'text': 'Arctic Ocean', "score": 0},
+      ]
     },
     {
-      "questionText":
+      'questionText':
           "What year was the very first model of the iPhone released ?",
-      "answers": ['2005', '2010', '2007', '2006'],
+      "answers": [
+        {"text": '2005', "score": 0},
+        {'text': '2010', "score": 0},
+        {'text': '2007', "score": 10},
+        {'text': '2006', "score": 0},
+      ]
     },
   ];
 
   var _questionsIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestions() {
+
+  void _answerQuestions(int score) {
+    _totalScore += score;
+
     setState(() {
       _questionsIndex += 1;
+
     });
   }
 
   void _resetState() {
     setState(() {
       _questionsIndex = 0;
+      _totalScore = 0;
     });
   }
 
@@ -85,7 +120,7 @@ class _MyAppState extends State<MyApp> {
             //       // ),
             //     ],
             //   )
-            : Result(_resetState)
+            : Result(_totalScore ,_resetState)
       ),
     );
   }
