@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
@@ -56,41 +56,36 @@ class _MyAppState extends State<MyApp> {
           title: Text("Quiz App"),
         ),
         body: _questionsIndex < _questions.length
-            ? Column(
-                children: [
-                  Question(
-                      _questions[_questionsIndex]["questionText"] as String),
+            ? Quiz(                
+                answerQuestion: _answerQuestions,
+                questionIndex: _questionsIndex,
+                questions: _questions,
+                )
+            // Column(
+            //     children: [
+            //       Question(
+            //           _questions[_questionsIndex]["questionText"] as String),
 
 
-                  ...(_questions[_questionsIndex]["answers"] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestions, answer);
-                  }).toList()
-                  // ElevatedButton(
-                  //   onPressed: _answerQuestions,
-                  //   child: Text("Press Me !"),
-                  // ),
-                  // ElevatedButton(
-                  //   onPressed: _answerQuestions,
-                  //   child: Text("Press Me !"),
-                  // ),
-                  // ElevatedButton(
-                  //   onPressed: _answerQuestions,
-                  //   child: Text("Press Me !"),
-                  // ),
-                ],
-              )
-            : Center(
-                child: Column(
-                  children: [
-                    Text("You did it"),
-                    ElevatedButton(
-                      child: Text("restart quiz"),
-                      onPressed: _resetState,
-                    ),
-                  ],
-                ),
-              ),
+            //       ...(_questions[_questionsIndex]["answers"] as List<String>)
+            //           .map((answer) {
+            //         return Answer(_answerQuestions, answer);
+            //       }).toList()
+            //       // ElevatedButton(
+            //       //   onPressed: _answerQuestions,
+            //       //   child: Text("Press Me !"),
+            //       // ),
+            //       // ElevatedButton(
+            //       //   onPressed: _answerQuestions,
+            //       //   child: Text("Press Me !"),
+            //       // ),
+            //       // ElevatedButton(
+            //       //   onPressed: _answerQuestions,
+            //       //   child: Text("Press Me !"),
+            //       // ),
+            //     ],
+            //   )
+            : Result(_resetState)
       ),
     );
   }
